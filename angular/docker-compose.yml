@@ -1,0 +1,16 @@
+version: "3"
+services:
+  angular:
+      environment:
+        NODE_ENV: development
+      build:
+        context: .
+        args:
+          appname: ${appname}
+      working_dir: /srv/${appname}
+      volumes:
+        - .:/srv/${appname}
+      ports:
+        - "4200:4200/tcp"
+      command: "ng serve --host 0.0.0.0"
+      privileged: true # required for runing ChromeHeadless
